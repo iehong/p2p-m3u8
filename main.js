@@ -9,10 +9,12 @@ if (!window.ReactNativeWebView) {
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 var engine = new p2pml.hlsjs.Engine({
-  segments: {
-    // swarmId: this.swarmId,
-  },
   loader: {
+    trackerAnnounce: [
+      "wss://tracker.openwebtorrent.com",
+      "wss://tracker.webtorrent.dev",
+      "https://tracker.loligirl.cn",
+    ],
     rtcConfig: {
       iceServers: [
         {
@@ -26,7 +28,6 @@ var engine = new p2pml.hlsjs.Engine({
           ],
         },
       ],
-      sdpSemantics: "unified-plan",
     },
   },
 });
@@ -37,7 +38,7 @@ var hls = new Hls({
 });
 p2pml.hlsjs.initHlsJsPlayer(hls);
 hls.loadSource(
-  urlParams.get("url") || "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+  urlParams.get("u") || "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
 );
 hls.attachMedia(video);
 
